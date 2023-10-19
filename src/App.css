@@ -1,78 +1,95 @@
 body {
-  background: rgb(210, 247, 247);
+  background: linear-gradient(
+    225deg,
+    rgb(158, 187, 250),
+    rgb(252, 237, 252),
+    rgb(177, 229, 175),
+    rgb(161, 174, 247)
+  );
 }
-.App {
+.tour {
   text-align: center;
 }
-.loading {
-  text-align: center;
-}
-section {
-  border: 3px aqua solid;
+
+.tourContainer {
   box-sizing: border-box;
-  width: 40vw;
+  width: 30rem;
   margin: 0 auto;
-  background: rgb(202, 218, 232);
 }
-.sectionCentre {
+.tourImg {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-img {
-  width: 100%;
-  height: 300px;
+  height: 250px;
 }
 .imageTitle {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: baseline;
 }
-.button {
-  cursor: pointer;
-  font-weight: bold;
-  padding: 5px;
-  border: 2px cyan solid;
-  outline: 2px rgb(221, 187, 221) solid;
-  outline-offset: -5px;
-}
-.button:hover {
-  background: rgb(235, 83, 83);
-}
-.underline {
-  width: 100%;
-  height: 1px;
-  border-bottom: 4px blue solid;
-  margin-top: 10px;
+.imageTitle > h3 {
+  font-size: 1.2rem;
+  margin: 0.1rem 0.5rem 0 0.5rem;
 }
 .info {
-  width: 95%;
+  /* width: 100%; */
+  font-size: 0.95rem;
   text-align: left;
+  margin: auto;
+  margin: 0.5rem 0.3rem 0 0.2rem;
+}
+.toggleButton {
+  border: none;
+  background: none;
+  font-weight: 600;
+  color: blue;
+  text-decoration: underline;
+}
+.toggleButton:hover {
+  cursor: pointer;
+}
+.button {
+  color: red;
+  font-weight: bold;
+  padding: 5px;
+  /* background: #f0f3f9; */
+  background: transparent;
+  text-decoration: none;
+  border-radius: 0.7rem;
+  margin-bottom: 2rem;
+}
+.button:hover {
+  cursor: pointer;
+  border: none;
+  padding: 7px;
+  background: none;
+  text-decoration: underline;
+  color: red;
+}
+
+/* ..... LoadingScreen */
+
+.loading {
+  text-transform: capitalize;
+  color: blue;
+  font-size: 3rem;
+  text-align: center;
+  position: relative;
+  top: 35vh;
 }
 .refreshTour {
   text-align: center;
+  text-decoration: underline;
 }
 .refreshButton {
-  width: 100px;
   font-size: 18px;
-  color: aliceblue;
-  background: red;
-  padding: 5px;
-  border: 2px blue solid;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: blue;
 }
 .refreshButton:hover {
-  background: rgb(14, 215, 54);
-  box-shadow: 2px 2px 2px 2px cyan;
-}
-.imageTitle h3 {
-  border-radius: 5%;
-  color: rgb(71, 107, 107);
-  background: rgb(210, 247, 247);
-}
-.toggleButton:hover {
-  color: rgb(71, 107, 107);
-  background: rgb(210, 247, 247);
+  color: white;
+  background: blue;
+  border-radius: 0.5rem;
 }

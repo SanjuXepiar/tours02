@@ -1,23 +1,37 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-const url = "https://course-api.com/react-tours-project";
+const url = "https://course-api.com/react-tours-project"; //sample url..
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [tours, setTours] = useState([]);
-  const [readMore, setReadMore] = useState(false);
 
-  // ...Fetch API
+  // ...Fetching url using fetch function
   const fetchTour = async () => {
     const response = await fetch(url);
-    const newTour = await response.json();
-    setLoading(false);
-    setTours(newTour);
-    console.log(newTour);
+    if (response.ok) {
+      try {
+        const newTour = await response.json();
+        setLoading(false);
+        setTours(newTour.map((tour) => ({ ...tour, readMore: false })));
+        console.log(newTour);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   useEffect(() => {
     fetchTour();
   }, []);
+
+  // .....HandleToggle
+  const handleToggle = (id) => {
+    setTours((prevTour) =>
+      prevTour.map((tour) =>
+        tour.id === id ? { ...tour, readMore: !tour.readMore } : tour
+      )
+    );
+  };
   // delete Tour button functionality
   const removeTour = (id) => {
     const newTours = tours.filter((tour) => tour.id !== id);
@@ -30,42 +44,41 @@ function App() {
   // ....0 tour title with refresh button
   if (tours.length === 0) {
     return (
-      <main className="refreshTour">
+      <section className="refreshTour">
         <h1>0 Tours Left</h1>
-        <button onClick={fetchTour} className="refreshButton">
-          Refr esh
+        <button className="refreshButton" onClick={fetchTour}>
+          Refresh
         </button>
-      </main>
+      </section>
     );
   }
 
   return (
-    <div className="App">
-      <h1> Tours Component</h1>
+    <div className="tour">
+      <h1 style={{ textDecorationLine: "underline" }}> Tours & Travels</h1>
       {tours.map((tour) => {
         const { id, image, name, info, price } = tour;
         return (
           <section>
-            <div key={id} className="sectionCentre">
-              <img src={image} alt={name} />
+            <div key={id} className="tourContainer">
+              <img className="tourImg" src={image} alt={name} />
               <div className="imageTitle">
-                <h1>{name}</h1>
+                <h3>{name}</h3>
                 <h3>$ {price}</h3>
               </div>
               <p className="info">
-                {readMore ? info : `${info.substring(0, 200)}...`}
+                {tour.readMore ? info : `${info.substring(0, 200)}...`}
                 <button
                   className="toggleButton"
-                  onClick={() => setReadMore(!readMore)}
+                  onClick={() => handleToggle(id)}
                 >
-                  {readMore ? "ShowLess" : "ReadMore"}
+                  {tour.readMore ? "ShowLess" : "ReadMore"}
                 </button>
               </p>
             </div>
-            <button onClick={() => removeTour(id)} className="button">
+            <button className="button" onClick={() => removeTour(id)}>
               Not Interested
             </button>
-            <div className="underline"></div>
           </section>
         );
       })}
