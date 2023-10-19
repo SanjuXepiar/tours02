@@ -14,7 +14,6 @@ function App() {
         const newTour = await response.json();
         setLoading(false);
         setTours(newTour.map((tour) => ({ ...tour, readMore: false })));
-        console.log(newTour);
       } catch (error) {
         console.log(error);
       }
